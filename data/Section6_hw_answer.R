@@ -5,8 +5,7 @@
  mov <- read.csv("Section6-Homework-Data.csv")
 
 #Data Exploration 
-mov(stats)
-mov(stats)
+summary(mov)
 
 #activate ggplot2
 #install.packages("ggplot2")
@@ -29,4 +28,7 @@ mov2 <- mov[filt & filt2, ]
 mov2
 str(mov2)
 summary(mov2)
+mov2
+
+
 mov2
