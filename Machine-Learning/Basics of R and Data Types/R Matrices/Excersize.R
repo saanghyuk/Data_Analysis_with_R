@@ -32,7 +32,7 @@ is.matrix(mat4.3)
 mat4.3
 
 #7
-sum(mat4.3)
+sum(mat4.3) 
 
 #8 연속 균등 분포, 모든 숫자 확률 일정
 help(runif)
