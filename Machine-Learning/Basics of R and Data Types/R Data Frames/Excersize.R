@@ -54,4 +54,6 @@ mean(df[df$hp > 100 & df$wt >2.5, ]$mpg)
 
 
 #EX12
+df['Hornet Sportabout', ]$mpg
 df['Hornet Sportabout', 'mpg']
+
