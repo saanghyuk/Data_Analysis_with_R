@@ -5,7 +5,7 @@
 ### Main Materials :  https://www.superdatascience.com/rcourse/ 
 
 
->  This is Sanghyuk's first R study materials. 
+>  This is Sanghyuk's first Data Analysis&Machine Learning with R  study materials. 
 
 
 

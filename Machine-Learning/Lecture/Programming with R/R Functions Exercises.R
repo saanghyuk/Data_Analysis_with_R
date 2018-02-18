@@ -78,7 +78,7 @@ summer <- function(num1, num2, num3){
 summer(3,6, 9)
 
 
-3 %% 2:5
+3 %% 2:5 ==0
 
 #EX6 prime -> 소수
 prime_check <- function(num) {
