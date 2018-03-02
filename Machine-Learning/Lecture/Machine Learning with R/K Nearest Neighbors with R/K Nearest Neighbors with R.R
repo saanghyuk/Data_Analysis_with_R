@@ -41,6 +41,9 @@ library(class) #contains knn function
 set.seed(101)
 
 #label 없는 train, test 넣고, 그리고, training label data 를 넣음. 이게 중요
+head(train.data)
+summary(train.data)
+head(test.data)
 predicted.purchase <- knn(train.data, test.data, train.purchase, k=1 )
 predicted.purchase
 
