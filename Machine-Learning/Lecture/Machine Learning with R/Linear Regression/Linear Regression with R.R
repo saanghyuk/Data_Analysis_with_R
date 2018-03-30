@@ -41,6 +41,7 @@ corrplot(cor.data, method='color')
 corrgram(df, order=T, lower.panel=panel.shade, upper.panel=panel.pie, text.panel=panel.txt)
 
 
+
 ggplot(df, aes(x=G3)) +geom_histogram(bins=20, alpha=0.5, fill='blue')
 
 
