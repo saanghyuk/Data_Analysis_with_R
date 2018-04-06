@@ -21,3 +21,6 @@ attach(bmi)
 
 
 ?attach
+
+
+data
