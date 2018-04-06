@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Barplots with ggplot2</title>
+<title>데이터 분석 및 경영</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11751,8 +11751,8 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Barplots-with-ggplot2">데이터분석 및 경영 개인과제 1<a class="anchor-link" href="#Barplots-with-ggplot2">&#182;</a></h1>
-<h2 id="ggplot()">2.1 barplot() 함수 이용<a class="anchor-link" href="#ggplot()">&#182;</a></h2>
+<h1 id="Barplots-with-ggplot2">데이터분석 및 경영 개인과제 1 - <i style="background-color:rgba(0,0,0,0.65); color:white">경영학과 손상혁 </i><a class="anchor-link" href="#Barplots-with-ggplot2">&#182;</a></h1>
+<h2 id="ggplot()">2.1 barplot 함수 이용<a class="anchor-link" href="#ggplot()">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -11941,13 +11941,55 @@ legend(8.5, 400, c("Jan", "Feb", "Mar", "Apr"), cex=0.8, fill=rainbow(4))
                     <div class="input_area">
                         <div class=" highlight hl-r">
     <pre>
-<span class="c1"># 점포별 월 매출액 비교</span>
+<!--<span class="c1"># 점포별 월 매출액 비교</span>-->
+<span class="p">library(ggplot2)
+Month <-c("Jan", "Feb", "Mar", "Apr")
+Gap<- c(354, 250, 234, 312)
+Eul <- c(234, 450, 200, 250)
+sales.df <- data.frame(Month, Gap, Eul)
+sales.df</span>
+        </pre>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[9]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+                        <div class=" highlight hl-r">
+    <pre>
+<span class="c1"># 월별 매출액</span>
         <span class="p">
-barplot(t(sales.k), main="Total Sales by Sales", xlab="Store", ylab="Sales", beside=T, names.arg=c("Gap", "Eul"), border="blue", col=rainbow(4), ylim=(c(0, 400)))<br>
-legend(8.5, 400, c("Jan", "Feb", "Mar", "Apr"), cex=0.8, fill=rainbow(4))
+Month <- rep(c("Jan", "Feb", "Mar", "Apr"), each=2, len=8)
+Store <- rep(c("Gap", "Eul"), times=4)
+Sales <- c(354, 234, 250, 450, 234, 200, 312, 250)
+sales.df2 <- data.frame(Month, Store, Sales)
+sales.df2</span>
+        </pre>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
 
-        </span>
+        </div>
+
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[10]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+                        <div class=" highlight hl-r">
+    <pre>
+        <span class="p">
+d<- ggplot(sales.df2, aes(x=Month, y=Sales, fill=Store)) + geom_col()
+d+scale_x_discrete(limits=c("Jan", "Feb", "Mar", "Apr"))</span>
+<span class="c1"># 이 함수가 없으면, 월(Month)은 알파벳 순서로 나열된다.</span>
         </pre>
                         </div>
 
@@ -11958,10 +12000,52 @@ legend(8.5, 400, c("Jan", "Feb", "Mar", "Apr"), cex=0.8, fill=rainbow(4))
         </div>
 
 
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[11]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+                        <div class=" highlight hl-r">
+    <pre>
+        <span class="p">
+<span class="c1"># 월별 매출 총합을 100%로 하여 두 상점의 점유율을 나타내 본다.</span>
+Pct <- round((Sales/600)*100, 1)
+sales.df2 <- data.frame(sales.df2, Pct)
+d <- ggplot(sales.df2, aes(x=Month, y=Pct, fill=Store))+ geom_col()
+d+scale_x_discrete(limits=c("Jan", "Feb", "Mar", "Apr"))</span>
+
+        </pre>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
         <div class="cell border-box-sizing code_cell rendered">
             <div class="input">
-                <div class="prompt input_prompt">In&nbsp;[9]:</div>
+                <div class="prompt input_prompt">In&nbsp;[12]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+                        <div class=" highlight hl-r">
+    <pre>
+        <span class="p">
+<span class="c1"># 위 도표를 매출액 크기 순서대로 그리고 싶다면 다음과 같이 하면 된다.</span>
+ggplot(data=sales.df2, aes(x=reorder(Month, -Sales), y=Sales, fill=Store))+ geom_col()</span>
+
+        </pre>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[13]:</div>
                 <div class="inner_cell">
                     <div class="input_area">
 
@@ -11977,7 +12061,7 @@ legend(8.5, 400, c("Jan", "Feb", "Mar", "Apr"), cex=0.8, fill=rainbow(4))
 
 
                         <div class="output_png output_subarea ">
-                            <img src="http://drive.google.com/uc?export=view&id=1SJr_xLPTrh_fs-cHeW2NgETsqvi_fbBV">
+                            <img src="http://drive.google.com/uc?export=view&id=1ewlZVY3TOyx0HyfHYGUvhkDsdtXtqAnX">
                         </div>
 
                     </div>
@@ -11989,13 +12073,247 @@ legend(8.5, 400, c("Jan", "Feb", "Mar", "Apr"), cex=0.8, fill=rainbow(4))
 
 
 
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[14]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+                        <div class=" highlight hl-r">
+    <pre>
+        <span class="p">
+<span class="c1"># 그리고 이 그림표를 90도 회전하여 나타내고 싶다면 단순히 coord_flip() 함수를 추가하면 된다.
+horizontal=T는 가짓수가 많거나 이름이 길때 유용하다 </span>
+ggplot(data=sales.df2, aes(x=reorder(Month, -Sales), y=Sales, fill=Store)) + geom_col() + coord_flip()</span>
 
+        </pre>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[15]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="output_wrapper">
+                <div class="output">
+
+
+                    <div class="output_area"><div class="prompt"></div>
+
+
+                        <div class="output_png output_subarea ">
+                            <img src="http://drive.google.com/uc?export=view&id=1ClKMOx6y5X5U-csSVHkp0Hcmb3yU6F45">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[16]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+                        <div class=" highlight hl-r">
+    <pre>
+        <span class="p">
+<span class="c1"># 빈도수 막대그림표
+horizontal=T는 가짓수가 많거나 이름이 길때 유용하다 </span>
+buy <- c("yes", "no", "no", "yes", "yes","no", "yes" )
+gender <- c("male", "female", "male", "female", "female", "female", "female")
+buy.gender <- data.frame(buy, gender)
+ggplot(data=buy.gender) + geom_bar(aes(x=gender, fill=buy ))</span>
+
+        </pre>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[17]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="output_wrapper">
+                <div class="output">
+
+
+                    <div class="output_area"><div class="prompt"></div>
+
+
+                        <div class="output_png output_subarea ">
+                            <img src="http://drive.google.com/uc?export=view&id=1dFcFHeIjf51CtO1UbwsbP9dYfpooVqhq">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[18]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+                        <div class=" highlight hl-r">
+    <pre>
+        <span class="p">
+<span class="c1"># 병렬 막대 그림표</span>
+ggplot(data=buy.gender) + geom_bar(aes(x=gender, fill=buy), position="dodge")</span>
+
+        </pre>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[19]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="output_wrapper">
+                <div class="output">
+
+
+                    <div class="output_area"><div class="prompt"></div>
+
+
+                        <div class="output_png output_subarea ">
+                            <img src="http://drive.google.com/uc?export=view&id=1jgCt6ayelR5b9cTDHo-jI8EvMd-1GZVf">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[20]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+                        <div class=" highlight hl-r">
+    <pre>
+        <span class="p">
+<span class="c1"># 막대 길이를 100%로 함</span>
+ggplot(data=buy.gender) + geom_bar(aes(x=gender, fill=buy), position="fill")</span>
+
+        </pre>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[21]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="output_wrapper">
+                <div class="output">
+
+
+                    <div class="output_area"><div class="prompt"></div>
+
+
+                        <div class="output_png output_subarea ">
+                            <img src="http://drive.google.com/uc?export=view&id=1N9zD0KkhESWCb_lFHHbiqMYUW57BYBV5">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[22]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+                        <div class=" highlight hl-r">
+    <pre>
+        <span class="p">
+<span class="c1"># 구매 여부에 따른 성별의 빈도수 비교 </span>
+ggplot(data=buy.gender) + geom_bar(aes(x=gender, fill=buy))+ facet_wrap(~buy)</span>
+
+        </pre>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cell border-box-sizing code_cell rendered">
+            <div class="input">
+                <div class="prompt input_prompt">In&nbsp;[23]:</div>
+                <div class="inner_cell">
+                    <div class="input_area">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="output_wrapper">
+                <div class="output">
+
+
+                    <div class="output_area"><div class="prompt"></div>
+
+
+                        <div class="output_png output_subarea ">
+                            <img src="http://drive.google.com/uc?export=view&id=18K1yo4EPhlkWGQngUpv2NHcaM66pS53Q">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
+
+
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>That's it for the basics of barplots!</p>
+<p>That's it!</p>
 
 </div>
 </div>
