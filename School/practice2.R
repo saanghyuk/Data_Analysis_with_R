@@ -203,6 +203,39 @@ barplot(sales.k, main="Total Sales by Month", xlab="Month", ylab="Sales", beside
         col=rainbow(2), ylim=(c(0, 500)))
 legend(10, 500, c("Gap", "Eul"), cex=0.7, fill=rainbow(2))
 
+sales.k
+barplot(t(sales.k), main="Total Sales by Store", xlab="Store", ylab="Sales", 
+        beside=T, names.arg=c("Gar", "Eul"), border="blue", 
+        col=rainbow(4), ylim=(c(0, 400)))
+
+legend(8.5, 400, c("Jan", "Feb", "Mar", "Apr"), cex=0.8, fill=rainbow(4))
+
+
+#line chart
+
+barplot(sales.k, main="Total Sales by Month", xlab="Month", ylab="Sales", beside=T, names.arg=c("Jan", "Feb", "Mar", "Apr"),
+        col=rainbow(2), ylim=(c(0, 500)))
+legend(10, 500, c("Gap", "Eul"), cex=0.7, fill=rainbow(2))
+
+Q1 <- c("Jan", "Feb", "Mar", "Apr")
+Seoul <- c(354, 250, 234, 312)
+Busan <- c(234, 450, 200, 250)
+
+
+plot(Seoul, type="o", col="red", ylim=c(0, 500))
+axis(1, at=1:4, lab=c("Jan", "Feb", "Mar", "Apr"))
+axis(2, ylim=c(0, 500))
+
+title(main="Sales", col.main="blue", font.main=4)
+title(xlab="month", col.lab="black")
+title(ylab="won", col.lab="black")
+
+lines(Busan, type="o", pch=22, col="green", lty=2)
+legend(3, 500, c("Seoul", "Busan"), cex=0.8, col=c("red", "green"),pch =21, lty=1:3 )
+
+
+
+
 
 sales.k
 t(sales.k)
@@ -254,6 +287,7 @@ body1 <- merge(ht, wt, by.x="name", by.y="student")
 body1
 
 
+
 ###relation
 
 frt <- c(7, 17, 27, 18, 9, 10)
@@ -300,3 +334,52 @@ total.array <- array(data=c(mid, final), dim=c(3, 2, 2), dimnames = list(c("kim"
 total.array
 attributes(total.array)
 dimnames(total.array)
+
+
+x <- c(1,2, 3 )
+y <- c(4, 5, 6)
+
+mat <- matrix(c(xy, yz), 2, 3)
+t(mat)
+
+
+matrix(c(x, y), ncol=3, byrow=T)
+
+mat <- matrix(1:12, ncol=4)
+length(mat)
+dim(mat)
+dimnames(mat)
+
+
+class(mat)
+
+mat <- matrix(1:12, ncol=4, dimnames=list(c("rice", "bread", "vegetable"), c("a", "b", "c", "d")))
+mat
+dimnames(mat)
+
+xyz <- xy+yz
+
+
+mat2 <- matrix(1:12, ncol=4)
+mat2[3, ]
+
+mat3 <- matrix(1:12, ncol=4)
+mat3
+apply(mat3, 1, sum)
+apply(mat3, 2, sum)
+
+
+
+rowSums(mat3[, 2:3])
+mat10 <- 1:6
+class(mat10)
+dim(mat10) <- c(2, 3)
+class(mat10)
+
+
+rbind(mat1, colSums(mat1))
+
+
+xyz
+seq(1, 10)
+seq(1, 10, by=2)
