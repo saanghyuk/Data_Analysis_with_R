@@ -56,3 +56,9 @@ is.factor(df1$class)
 
 
 
+
+
+x <- c(6, 7, 2, 4, 8, 6, 3, 4)
+y <- c(22, 21, 8, 17, 27, 18, 9 , 14)
+kmodel <- lm(y ~ x)
+summary(kmodel)
